@@ -1,0 +1,1 @@
+python main.py --train --no-show --num-pop x --num-gen x --num-exp x --gap x --crossover-rate x --mutation-rate x

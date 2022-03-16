@@ -1,0 +1,1 @@
+python main.py --train --no-show --num-pop 10 --num-gen 10 --num-exp 1000
