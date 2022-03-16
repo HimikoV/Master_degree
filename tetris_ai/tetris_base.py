@@ -182,10 +182,10 @@ def main():
     pygame.init()
 
     FPSCLOCK    = pygame.time.Clock()
-    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    # DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     BASICFONT   = pygame.font.Font('freesansbold.ttf', 18)
     BIGFONT     = pygame.font.Font('freesansbold.ttf', 100)
-    pygame.display.set_caption('Tetris AI')
+    # pygame.display.set_caption('Tetris AI')
 
     if (MANUAL_GAME):
         run_game()
@@ -229,7 +229,7 @@ def run_game():
             if (event.type == KEYUP):
                 if (event.key == K_p):
                     # PAUSE the game
-                    DISPLAYSURF.fill(BGCOLOR)
+                    # DISPLAYSURF.fill(BGCOLOR)
                     # Pause until a key press
                     show_text_screen('Paused')
 
@@ -342,7 +342,7 @@ def run_game():
                 last_fall_time      = time.time()
 
         # Drawing everything on the screen
-        DISPLAYSURF.fill(BGCOLOR)
+        # DISPLAYSURF.fill(BGCOLOR)
         draw_board(board)
         draw_status(score, level)
         draw_next_piece(next_piece)
@@ -350,7 +350,7 @@ def run_game():
         if falling_piece != None:
             draw_piece(falling_piece)
 
-        pygame.display.update()
+        # pygame.display.update()
         FPSCLOCK.tick(FPS)
 
 
@@ -389,20 +389,20 @@ def show_text_screen(text):
     # Draw the text drop shadow
     title_surf, title_rect = make_text_objs(text, BIGFONT, TEXTSHADOWCOLOR)
     title_rect.center      = (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2))
-    DISPLAYSURF.blit(title_surf, title_rect)
+    # DISPLAYSURF.blit(title_surf, title_rect)
 
     # Draw the text
     title_surf, title_rect = make_text_objs(text, BIGFONT, TEXTCOLOR)
     title_rect.center      = (int(WINDOWWIDTH / 2) - 3, int(WINDOWHEIGHT / 2) - 3)
-    DISPLAYSURF.blit(title_surf, title_rect)
+    # DISPLAYSURF.blit(title_surf, title_rect)
 
     # Draw the additional "Press a key to play." text.
     press_key_surf, press_key_rect = make_text_objs('Press a key to play.', BASICFONT, TEXTCOLOR)
     press_key_rect.center = (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2) + 100)
-    DISPLAYSURF.blit(press_key_surf, press_key_rect)
+    # DISPLAYSURF.blit(press_key_surf, press_key_rect)
 
     while check_key_press() == None:
-        pygame.display.update()
+        # pygame.display.update()
         FPSCLOCK.tick()
 
 
@@ -557,18 +557,18 @@ def draw_box(boxx, boxy, color, pixelx=None, pixely=None):
     if pixelx == None and pixely == None:
         pixelx, pixely = conv_to_pixels_coords(boxx, boxy)
 
-    pygame.draw.rect(DISPLAYSURF, COLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 1, BOXSIZE - 1))
-    pygame.draw.rect(DISPLAYSURF, LIGHTCOLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 4, BOXSIZE - 4))
+    # pygame.draw.rect(DISPLAYSURF, COLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 1, BOXSIZE - 1))
+    # pygame.draw.rect(DISPLAYSURF, LIGHTCOLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 4, BOXSIZE - 4))
 
 
 def draw_board(board):
     """Draw board"""
 
     # Draw the border around the board
-    pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (XMARGIN - 3, TOPMARGIN - 7, (BOARDWIDTH * BOXSIZE) + 8, (BOARDHEIGHT * BOXSIZE) + 8), 5)
+    # pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (XMARGIN - 3, TOPMARGIN - 7, (BOARDWIDTH * BOXSIZE) + 8, (BOARDHEIGHT * BOXSIZE) + 8), 5)
 
     # Fill the background of the board
-    pygame.draw.rect(DISPLAYSURF, BGCOLOR, (XMARGIN, TOPMARGIN, BOXSIZE * BOARDWIDTH, BOXSIZE * BOARDHEIGHT))
+    # pygame.draw.rect(DISPLAYSURF, BGCOLOR, (XMARGIN, TOPMARGIN, BOXSIZE * BOARDWIDTH, BOXSIZE * BOARDHEIGHT))
 
     # Draw the individual boxes on the board
     for x in range(BOARDWIDTH):
@@ -583,13 +583,13 @@ def draw_status(score, level):
     score_surf = BASICFONT.render('Score: %s' % score, True, TEXTCOLOR)
     score_rect = score_surf.get_rect()
     score_rect.topleft = (WINDOWWIDTH - 150, 80)
-    DISPLAYSURF.blit(score_surf, score_rect)
+    # DISPLAYSURF.blit(score_surf, score_rect)
 
     # draw the level text
     levelSurf = BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)
     levelRect = levelSurf.get_rect()
     levelRect.topleft = (WINDOWWIDTH - 150, 110)
-    DISPLAYSURF.blit(levelSurf, levelRect)
+    # DISPLAYSURF.blit(levelSurf, levelRect)
 
 
 def draw_piece(piece, pixelx=None, pixely=None):
@@ -616,7 +616,7 @@ def draw_next_piece(piece):
     next_surf = BASICFONT.render('Next:', True, TEXTCOLOR)
     next_rect = next_surf.get_rect()
     next_rect.topleft = (WINDOWWIDTH - 150, 160)
-    DISPLAYSURF.blit(next_surf, next_rect)
+    # DISPLAYSURF.blit(next_surf, next_rect)
 
     # draw the "next" piece
     draw_piece(piece, pixelx=WINDOWWIDTH-150, pixely=160)

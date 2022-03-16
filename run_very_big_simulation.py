@@ -26,5 +26,5 @@ for i in range(100):
 
 for i in num_pop:
     for k in num_gen:
-        bat_overrite(file_sh, x=i, y=k, z=num_exp)
-        subprocess.call([file_sh])
+        bat_overrite(file_bat, x=i, y=k, z=num_exp)
+        subprocess.call([file_bat])

@@ -1,49 +1,53 @@
-import random, time, pygame, sys
+import random
+import time
+import pygame
+import sys
 from pygame.locals import *
 import tetris_ai.tetris_base as game
 
-size   = [640, 480]
-screen = pygame.display.set_mode((size[0], size[1]))
+size = [640, 480]
+# screen = pygame.display.set_mode((size[0], size[1]))
 
-def run_game(chromosome, speed, max_score = 20000, no_show = False):
+
+def run_game(chromosome, speed, max_score=20000, no_show=False):
 
     game.FPS = int(speed)
     game.main()
 
-    board            = game.get_blank_board()
-    last_fall_time   = time.time()
-    score            = 0
+    board = game.get_blank_board()
+    last_fall_time = time.time()
+    score = 0
     level, fall_freq = game.calc_level_and_fall_freq(score)
-    falling_piece    = game.get_new_piece()
-    next_piece       = game.get_new_piece()
+    falling_piece = game.get_new_piece()
+    next_piece = game.get_new_piece()
 
     # Calculate best move
     chromosome.calc_best_move(board, falling_piece)
 
     num_used_pieces = 0
-    removed_lines   = [0,0,0,0] # Combos
+    removed_lines = [0, 0, 0, 0]  # Combos
 
     alive = True
-    win   = False
+    win = False
 
     # Game loop
     while alive:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print ("Game exited by user")
+                print("Game exited by user")
                 exit()
 
         if falling_piece == None:
             # No falling piece in play, so start a new piece at the top
             falling_piece = next_piece
-            next_piece    = game.get_new_piece()
+            next_piece = game.get_new_piece()
 
             # Decide the best move based on your weights
             chromosome.calc_best_move(board, falling_piece, no_show)
 
             # Update number of used pieces and the score
-            num_used_pieces +=1
-            score           += 1
+            num_used_pieces += 1
+            score += 1
 
             # Reset last_fall_time
             last_fall_time = time.time()
@@ -90,17 +94,18 @@ def run_game(chromosome, speed, max_score = 20000, no_show = False):
         # Stop condition
         if (score > max_score):
             alive = False
-            win   = True
+            win = True
 
     # Save the game state
     game_state = [num_used_pieces, removed_lines, score, win]
 
     return game_state
 
+
 def draw_game_on_screen(board, score, level, next_piece, falling_piece, chromosome):
     """Draw game on the screen"""
 
-    game.DISPLAYSURF.fill(game.BGCOLOR)
+    # game.DISPLAYSURF.fill(game.BGCOLOR)
     game.draw_board(board)
     game.draw_status(score, level)
     game.draw_next_piece(next_piece)
@@ -108,5 +113,5 @@ def draw_game_on_screen(board, score, level, next_piece, falling_piece, chromoso
     if falling_piece != None:
         game.draw_piece(falling_piece)
 
-    pygame.display.update()
+    # pygame.display.update()
     game.FPSCLOCK.tick(game.FPS)
