@@ -5,6 +5,7 @@ import copy
 import tetris_ai.tetris_base as game
 import tetris_ai.tetris_ai as ai
 
+pygame.init()
 
 class Chromosome():
     def __init__(self, weights):

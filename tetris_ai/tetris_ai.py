@@ -5,6 +5,7 @@ import sys
 from pygame.locals import *
 import tetris_ai.tetris_base as game
 
+pygame.init()
 size = [640, 480]
 # screen = pygame.display.set_mode((size[0], size[1]))
 

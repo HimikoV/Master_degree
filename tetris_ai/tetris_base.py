@@ -5,7 +5,7 @@
 
 import random, time, pygame, sys
 from pygame.locals import *
-
+pygame.init()
 ##############################################################################
 # SETTING UP GENERAL CONSTANTS
 ##############################################################################
